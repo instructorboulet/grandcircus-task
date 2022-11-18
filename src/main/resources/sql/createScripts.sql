@@ -1,8 +1,8 @@
-connect 'jdbc:derby://localhost:1527/data/gc-test;create=true;user=gc;password=pwd1234';
+connect 'jdbc:derby://localhost:1527/data/gc-production;create=true;user=gc;password=pwd1234';
 
+drop table tasks;
 drop table status;
 drop table priority;
-drop table tasks;
 drop table users ;
 
 create table users (

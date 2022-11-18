@@ -36,6 +36,8 @@ public class T2_InsertUsers {
 			repository.save(new User(10,"person.10", "Howard", "Lance"));
 		}
 				
+		
+		users = repository.findAll();		
 		users.forEach(System.out::println);		
 		
 		int numberOfUsers = 10;

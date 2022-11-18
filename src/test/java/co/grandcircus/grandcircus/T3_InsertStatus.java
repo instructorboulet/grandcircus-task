@@ -42,6 +42,7 @@ public class T3_InsertStatus {
 		// fetch all customers log.info("Found with findAll():");
 		log.info("-------------------------------");
 		
+		list = repository.findAll();
 		for (var currentRow : list) {
 			log.info(currentRow.toString());
 		}
