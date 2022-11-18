@@ -1,4 +1,4 @@
-connect 'jdbc:derby://localhost:1527/data/gc2;create=true;user=gc;password=pwd1234';
+connect 'jdbc:derby://localhost:1527/data/gc-test;create=true;user=gc;password=pwd1234';
 
 drop table status;
 drop table priority;
@@ -24,8 +24,6 @@ create table status (
    description varchar(20),
    primary key (status_code)
 );
-
-drop table tasks;
 
 create table tasks (
    task_id int not null,

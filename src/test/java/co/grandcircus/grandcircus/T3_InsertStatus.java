@@ -1,5 +1,7 @@
 package co.grandcircus.grandcircus;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -22,20 +24,31 @@ public class T3_InsertStatus {
 
 	@Test
 	public void insert() {
+		
+		
+		var list = repository.findAll();
+		
+		if (list.iterator().hasNext() == false) {
+			
+			repository.save(new Status("ns", "Not Started"));
+			repository.save(new Status("ip", "In Progress"));
+			repository.save(new Status("c", "Complete"));
+			repository.save(new Status("d", "Deffered"));
+			repository.save(new Status("n", "None"));
+			
+		}
 
-		repository.save(new Status("ns", "Not Started"));
-		repository.save(new Status("ip", "In Progress"));
-		repository.save(new Status("c", "Complete"));
-		repository.save(new Status("d", "Deffered"));
-		repository.save(new Status("n", "None"));
-
+		
 		// fetch all customers log.info("Found with findAll():");
 		log.info("-------------------------------");
-		var list = repository.findAll();
+		
 		for (var currentRow : list) {
 			log.info(currentRow.toString());
 		}
 		log.info("");
+		
+		int count = 5;
+		assertThat(list).hasSize(count);
 
 	}
 

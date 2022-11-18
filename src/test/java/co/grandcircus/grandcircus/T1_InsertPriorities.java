@@ -23,13 +23,17 @@ public class T1_InsertPriorities {
 	private static final Logger log = LoggerFactory.getLogger(T1_InsertPriorities.class);
 
 	@Test
-	public void insert() {
-
-		repository.save(new Priority("P1", "Normal"));
-		repository.save(new Priority("P2", "High"));
-		repository.save(new Priority("P3", "Low"));
-		repository.save(new Priority("N1", "None"));
-
+	public void insert() {		
+		
+		var results = repository.findAll();		
+		
+		if (results.iterator().hasNext() == false) {
+			repository.save(new Priority("P1", "Normal"));
+			repository.save(new Priority("P2", "High"));
+			repository.save(new Priority("P3", "Low"));
+			repository.save(new Priority("N1", "None"));	
+		}
+		
 		// fetch all customers log.info("Found with findAll():");
 		log.info("-------------------------------");
 		var list = repository.findAll();
