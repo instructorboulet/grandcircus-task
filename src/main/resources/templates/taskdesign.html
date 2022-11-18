@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+</style>
+<link rel="stylesheet" href="/task.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script src="/loadTable.js"></script>
+	<script src="/taskReport.js"></script>
+</head>
+<body>
+
+	<h2>
+		Task List 2 <span id="newTask" data-taskId="-999" class='new'>+</span>
+	</h2>
+	
+	Search By: 
+	<select id="searchMode">
+	    <option value="1">All</option>
+		<option value="2">Task</option>
+		<option value="3">User</option>
+		<option value="4">Priority</option>
+		<option value="5">Status</option>		
+		<option value="6">Due Date</option>
+		<option value="7">Due Date Greater Than</option>
+		<option value="8">Due Date Less Than</option>
+		<option value="9">Complete</option>
+		<option value="10">Complete Greater Than</option>
+		<option value="11">Complete Less Than</option>
+	</select>	
+	
+	<select id='selectValues'>		
+	</select>
+	
+	<input type="hidden" id="value" data-date-format="YYMMDD"/>
+	<button data-taskId="100" id="search">Search</button>
+	
+	<br />	<br />
+
+	<table id = "table-list">
+
+		<thead>
+			<tr>
+
+				<th colspan='2'>Task</th>
+				<th>User <img id="imgUser" class='sortImg' src="/noArrow.png"  data-sortorder="1"  /> </th>
+				<th>Priority <img id="imgPriority" class='sortImg' src="/noArrow.png"  data-sortorder="2"/> </th>
+				<th>Status </th>
+				<th>Start Date <img id="imgStartDate" class='sortImg' src="/noArrow.png"  data-sortorder="3"/></th>
+				<th>End Date <img id="imgEndDate" class='sortImg' src="/noArrow.png"  data-sortorder="4"/></th>
+				<th colspan="1" class="complete">%Complete
+					 <img id="imgComplete" class='sortImg' src="/noArrow.png"  data-sortorder="5"/>
+				</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><button data-taskId="100" class="edit">Edit</button>
+				<td>Create Module 1</td>
+				<td>Person 1</td>
+				<td>Normal</td>
+				<td>Not Started</td>
+				<td>11/12/2022</td>
+				<td>11/12/2023</td>
+				<td><img id="t1" data-percentage="20%" class="percentage"
+					src="/black.jpg" /></td>
+				<td data-percentage="20%" class="percentageDisplay">XXX</td>
+
+			</tr>
+			<tr>
+				<td><button data-taskId="101" class="edit">Edit</button>
+				<td>Create Module 2</td>
+				<td>Person 2</td>
+				<td>Normal</td>
+				<td>Not Started</td>
+				<td>11/12/2022</td>
+				<td>11/12/2023</td>
+				<td><img id="t2" data-percentage="30%" class="percentage"
+					src="/black.jpg" /></td>
+				<td data-percentage="30%" class="percentageDisplay">XXX</td>
+
+			</tr>
+			<tr>
+				<td><button data-taskId="102" class="edit">Edit</button>
+				<td>Create Module 3</td>
+				<td>Person 3</td>
+				<td>Normal</td>
+				<td>Not Started</td>
+				<td>11/12/2022</td>
+				<td>11/12/2023</td>
+				<td><img id="t3" data-percentage="100%" class="percentage"
+					src="/black.jpg" /></td>
+				<td data-percentage="100%" class="percentageDisplay">XXX</td>
+
+			</tr>
+			<tr>
+				<td><button data-taskId="103" class="edit">Edit</button>
+				<td>Create Module 4</td>
+				<td>Person 4</td>
+				<td>Normal</td>
+				<td>Not Started</td>
+				<td>11/12/2022</td>
+				<td>11/12/2023</td>
+				<td><img id="t4" data-percentage="99%" class="percentage"
+					src="/black.jpg" /></td>
+				<td data-percentage="99%" class="percentageDisplay">XXX</td>
+
+			</tr>
+
+			<tr>
+				<td><button data-taskId="104" class="edit">Edit</button>
+				<td>Create Module 5</td>
+				<td>Person 5</td>
+				<td>Normal</td>
+				<td>Not Started</td>
+				<td>11/12/2022</td>
+				<td>11/12/2023</td>
+				<td><img id="t5" data-percentage="42%" class="percentage"
+					src="/black.jpg" /></td>
+				<td data-percentage="42%" class="percentageDisplay">XXX</td>
+			</tr>
+			<tr>
+				<td><button data-taskId="105" class="edit">Edit</button>
+				<td>Create Module 6</td>
+				<td>Person 6</td>
+				<td>Normal</td>
+				<td>Not Started</td>
+				<td>11/12/2022</td>
+				<td>11/12/2023</td>
+				<td><img id="t6" data-percentage="90%" class="percentage"
+					src="/black.jpg" /></td>
+				<td data-percentage="90%" class="percentageDisplay">XXX</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th colspan="10"><span id="newTask2" data-taskId="new">+
+						New Task</span></th>
+		</tfoot>
+	</table>
+
+	<form id="frmEditTask" action="/web/task" method="get">
+		<input type="hidden" value="na" name="taskId" id="taskId" />
+	</form>
+
+	<script type="text/javascript" >
+	
+	function edit() {
+	
+		
+		console.log({"this":this });		
+		let taskId = this.dataset.taskid;
+		let inputTaskId = document.getElementById("taskId");
+		inputTaskId.value = taskId;
+		
+		document.forms[0].submit();
+		
+	}
+	
+	function editButton() {		
+		var edits = document.querySelectorAll(".edit");
+		
+		edits.forEach( e => {			
+			e.onclick = edit;
+		});
+		
+		let newTask = document.getElementById("newTask");		
+	}
+	
+	
+	function newButton(id) {		
+		let newTask = document.getElementById(id);					
+		newTask.onclick = edit;	
+	}
+
+	function getAllPercetanges () {
+		var perecentages = document.querySelectorAll(".percentage");
+		var list = [...perecentages];
+		
+		list.forEach( e => {
+			var dataPercentage = e.dataset.percentage;
+			e.style.width=dataPercentage;
+		})
+	}
+	
+	function getAllPercetangeDisplay () {
+		var perecentages = document.querySelectorAll(".percentageDisplay");
+		var list = [...perecentages];
+		
+		list.forEach( e => {
+			var dataPercentage = e.dataset.percentage;
+			e.innerText=dataPercentage;
+		})
+	}
+
+
+	function update(id){
+		var x = document.querySelector(id);
+		x.style.width="10%";
+	}	
+	
+	getAllPercetanges();
+	getAllPercetangeDisplay();
+	editButton();
+	newButton("newTask");
+	newButton("newTask2");
+	
+</script>
+
+</body>
+</html>

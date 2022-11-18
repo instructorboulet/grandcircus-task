@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="/task.css">
+</head>
+<body>
+
+	<h1>Task</h1>
+
+	<form class='taskForm' th:action="@{/web/task}"   th:object="${task}" method="post">
+		<input type="hidden" th:field="*{taskId}" />		
+		
+		
+		<label for="txtdescription">Name:</label>		
+		<input type="text" th:field="*{description}" />
+		
+		<br /> <br />
+		
+		<label for="uName">User:</label>
+		
+		<select th:field="*{userId}">
+			<option value="-999" selected="selected"> None </option>
+		    <option th:each="user : ${users}" th:value="${user.userId}" th:text='${user.lastName + ", " + user.firstName  }'></option>					
+		</select> <br /> <br />
+		
+		
+		
+		<label for="BeginDate">Start Date:</label> <input data-date-format="YYMMDD" type="date" th:field="*{startDate}" /> <br /> <br> 
+		<label for="EndTaskDate">End Date:</label> <input data-date-format="YYMMDD" type="date" th:field="*{endDate}" /> <br /> <br /> 
+		<label for="status">Status:</label>
+		
+		<select th:field="*{statusCode}">
+		    <option th:each="status : ${statuses}" th:value="${status.statusCode}" th:text="${status.description}"></option>					
+		</select> <br /> <br /> 
+		
+		<label for="complete">Complete:</label> <input type="number" th:field="*{complete}" /> <br /> <br />
+		
+		<label for="priorityCode">Priority:</label>
+		
+		<select class="form-control"  th:field="*{priorityCode}" >		    
+		    <option th:each="option : ${options}" th:value="${option.priorityCode}" th:text="${option.description}"></option>
+		</select>		
+				
+		<br /> <br />	
+		
+		<label for="txtNotes">Notes:</label>
+		<br />
+		<textarea th:field="*{notes}" rows="4" cols="50"></textarea>
+
+		<br /> <br /><input class="submitButton" type="submit" value="Submit" /> 
+		             <input class="submitButton" type="reset" value="Reset" />
+	</form>
+
+</body>
+</html>

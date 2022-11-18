@@ -1,0 +1,70 @@
+<script type="text/javascript" >
+	
+	function edit() {
+	
+		
+		console.log({"this":this });		
+		let taskId = this.dataset.taskid;
+		let inputTaskId = document.getElementById("taskId");
+		inputTaskId.value = taskId;
+		
+		document.forms[0].submit();
+		
+	}
+	
+	function editButton() {		
+		var edits = document.querySelectorAll(".edit");
+		
+		edits.forEach( e => {			
+			e.onclick = edit;
+		});
+		
+		let newTask = document.getElementById("newTask");
+		
+		
+	}
+	
+	
+	function newButton(id) {
+		
+		let newTask = document.getElementById(id);					
+		newTask.onclick = edit;		
+		
+		
+	}
+
+	
+
+	function getAllPercetanges () {
+		var perecentages = document.querySelectorAll(".percentage");
+		var list = [...perecentages];
+		
+		list.forEach( e => {
+			var dataPercentage = e.dataset.percentage;
+			e.style.width=dataPercentage;
+		})
+	}
+	
+	function getAllPercetangeDisplay () {
+		var perecentages = document.querySelectorAll(".percentageDisplay");
+		var list = [...perecentages];
+		
+		list.forEach( e => {
+			var dataPercentage = e.dataset.percentage;
+			e.innerText=dataPercentage;
+		})
+	}
+
+
+	function update(id){
+		var x = document.querySelector(id);
+		x.style.width="10%";
+	}	
+	
+	getAllPercetanges();
+	getAllPercetangeDisplay();
+	editButton();
+	newButton("newTask");
+	newButton("newTask2");
+	
+</script>
